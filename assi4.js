@@ -6,6 +6,7 @@ const goBackButton=document.getElementById('go-back');
 let submit_description= document.getElementById('submit-discription');
 let high_scores_description=document.getElementById('high-scores-description');
 let initial_input=document.getElementById('initial-input');
+let submit_button_and_input=document.getElementById('submit-button-and-input');
 
 //get Element from html
 const bigTitle=document.getElementById('big-header');
@@ -34,7 +35,7 @@ let next_button_times=1;
 startButton.addEventListener('click',startQuestion);
 nextButton.addEventListener('click',nextQuestion);
 submitButton.addEventListener('click',afterSubmit);
-goBackButton.addEventListener('click',nextQuestion);
+goBackButton.addEventListener('click',goBack);
 buttonA.addEventListener('click',nextQuestion);
 buttonB.addEventListener('click',nextQuestion);
 buttonC.addEventListener('click',nextQuestion);
@@ -54,16 +55,38 @@ Answer=['strings','booleans','alerts','numbers',
 'commas','curly brackets','quotes','parenthesis',
 'JavaScript','terminal/bash','for loops','console.log']
 
+//Correct Answer
+correctAns=['alerts','parenthesis','all of the above','quotes','console.log'];
+
 //Function of the timer
 function countdown(){
 
-    var timeLeft=90;
+    var timeLeft=10;
     timer2 =setInterval(function(){
-        if(timeLeft>1){
+        if(timeLeft>=1){
            timerDisplay.textContent='Time: '+ timeLeft;
            timeLeft--;
-           
         }
+
+        else{
+            console.log("timer end")
+            nextButton.classList.add('hide');
+            displayQuestion.classList.add('hide');
+            buttonA.classList.add('hide');
+            buttonB.classList.add('hide');
+            buttonC.classList.add('hide');
+            buttonD.classList.add('hide');
+        
+            submit_description.classList.remove('hide');
+            submit_button_and_input.classList.remove('hide');
+            submit_description.textContent = "All done \n Your final score is "+score;
+            console.log("score: "+score);
+            clearInterval(timer2);
+            timerDisplay.classList.add('hide');
+            timer2.classList.add('hide');
+        
+        }
+       
     },1000);
 
 
@@ -71,6 +94,8 @@ function countdown(){
 
 //Function of the start button
 function startQuestion(){
+    countdown();
+
     console.log('Game Started');
     startButton.classList.add('hide');
     bigTitle.classList.add('hide');
@@ -89,9 +114,10 @@ function startQuestion(){
     document.getElementById('btnC').textContent=Answer[2];
     document.getElementById('btnD').textContent=Answer[3];
 
-    countdown();
-   
-}
+ 
+    }
+      
+
 
 //Function of the next button
 function nextQuestion(){
@@ -125,8 +151,12 @@ function nextQuestion(){
     buttonD.classList.add('hide');
 
     submit_description.classList.remove('hide');
+    submit_button_and_input.classList.remove('hide');
+    submit_description.textContent = "All done \n Your final score is "+score;
+    console.log("score: "+score);
     clearInterval(timer2);
     timerDisplay.classList.add('hide');
+    
 
 
     }
@@ -136,11 +166,25 @@ function nextQuestion(){
 function afterSubmit(){
     submit_description.classList.add('hide');
     high_scores_description.classList.remove('hide');
-    document.getElementById('high-scores').textContent=document.getElementById('initial-input').value;
+    document.getElementById('high-scores').textContent=document.getElementById('initial-input').value+' - '+score;
+    submit_button_and_input.classList.add('hide');
+
+    clearInterval(timer2);
+    timerDisplay.classList.add('hide');
 
     localStorage.setItem("initial_input",score);
 }
 
+
+//function of the go back button
+function goBack(){
+    submit_description.classList.remove('hide');
+    submit_button_and_input.classList.remove('hide');
+    submit_description.textContent = "All done \n Your final score is "+score;
+    console.log("score: "+score);
+    
+    high_scores_description.classList.add('hide');
+}    
 
 
 
