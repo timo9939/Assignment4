@@ -64,7 +64,7 @@ correctAns=['alerts','parenthesis','all of the above','quotes','console.log'];
 //Function of the timer
 function countdown(){
 
-    var timeLeft=90;
+    var timeLeft=60;
     timer2 =setInterval(function(){
         if(timeLeft>=1){
            timerDisplay.textContent='Time: '+ timeLeft;
