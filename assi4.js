@@ -3,10 +3,12 @@ const startButton =document.getElementById('start-btn');
 const nextButton=document.getElementById('next-btn');
 const submitButton=document.getElementById('submit');
 const goBackButton=document.getElementById('go-back');
+const clearButton= document.getElementById('clear-high-scores');
 let submit_description= document.getElementById('submit-discription');
 let high_scores_description=document.getElementById('high-scores-description');
 let initial_input=document.getElementById('initial-input');
 let submit_button_and_input=document.getElementById('submit-button-and-input');
+let highScoreDisplay='';
 
 //get Element from html
 const bigTitle=document.getElementById('big-header');
@@ -36,6 +38,7 @@ startButton.addEventListener('click',startQuestion);
 nextButton.addEventListener('click',nextQuestion);
 submitButton.addEventListener('click',afterSubmit);
 goBackButton.addEventListener('click',goBack);
+clearButton.addEventListener('click',clearScore);
 buttonA.addEventListener('click',nextQuestion);
 buttonB.addEventListener('click',nextQuestion);
 buttonC.addEventListener('click',nextQuestion);
@@ -61,7 +64,7 @@ correctAns=['alerts','parenthesis','all of the above','quotes','console.log'];
 //Function of the timer
 function countdown(){
 
-    var timeLeft=10;
+    var timeLeft=5;
     timer2 =setInterval(function(){
         if(timeLeft>=1){
            timerDisplay.textContent='Time: '+ timeLeft;
@@ -83,7 +86,7 @@ function countdown(){
             console.log("score: "+score);
             clearInterval(timer2);
             timerDisplay.classList.add('hide');
-            timer2.classList.add('hide');
+            
         
         }
        
@@ -114,8 +117,19 @@ function startQuestion(){
     document.getElementById('btnC').textContent=Answer[2];
     document.getElementById('btnD').textContent=Answer[3];
 
- 
-    }
+    /*Answer.forEach(function(element,index) {
+        element.textContent=Answer[index];
+     console.log("Index: "+index+'Value: '+element);*/
+    
+
+    buttonC.addEventListener('click',function (){
+            console.log('correct');
+            score=score+10;} )
+
+    
+    
+        
+}
       
 
 
@@ -167,6 +181,7 @@ function afterSubmit(){
     submit_description.classList.add('hide');
     high_scores_description.classList.remove('hide');
     document.getElementById('high-scores').textContent=document.getElementById('initial-input').value+' - '+score;
+    
     submit_button_and_input.classList.add('hide');
 
     clearInterval(timer2);
@@ -180,13 +195,16 @@ function afterSubmit(){
 function goBack(){
     submit_description.classList.remove('hide');
     submit_button_and_input.classList.remove('hide');
-    submit_description.textContent = "All done \n Your final score is "+score;
+    submit_description.textContent = "All done \n Your final score is "+score+" out of 50";
     console.log("score: "+score);
     
     high_scores_description.classList.add('hide');
 }    
 
-
+//functin of the clear high scores button
+function clearScore(){
+    localStorage.clear();
+}
 
 
 
