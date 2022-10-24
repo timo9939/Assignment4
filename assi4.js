@@ -64,7 +64,7 @@ correctAns=['alerts','parenthesis','all of the above','quotes','console.log'];
 //Function of the timer
 function countdown(){
 
-    var timeLeft=5;
+    var timeLeft=90;
     timer2 =setInterval(function(){
         if(timeLeft>=1){
            timerDisplay.textContent='Time: '+ timeLeft;
@@ -204,6 +204,7 @@ function goBack(){
 //functin of the clear high scores button
 function clearScore(){
     localStorage.clear();
+    
 }
 
 
